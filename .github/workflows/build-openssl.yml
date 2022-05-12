@@ -19,6 +19,12 @@ jobs:
       run: (cd build; make -j2)
     - name: test
       run: ./build/tests
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: |
+          build/*.so
   build-macos:
     runs-on: macos-latest
     steps:
@@ -35,6 +41,13 @@ jobs:
       run: (cd build; make -j2)
     - name: test
       run: ./build/tests
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: |
+          build/*.dylib
+          build/*.so
   build-windows:
     runs-on: windows-latest
     steps:
@@ -56,7 +69,7 @@ jobs:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: dist-without-markdown
+        name: dist
         path: |
-          build
+          build/*.dll
 
